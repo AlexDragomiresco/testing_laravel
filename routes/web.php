@@ -18,8 +18,8 @@ Route::post('/clients/new', 'ClientsController@create');
 Route::get('/clients/{client_id}', 'ClientsController@show');
 Route::post('/clients/{client_id}', 'ClientsController@modify');
 
-Route::get('/reservations/{client_id}', 'ReservationsController@checkAvailableRooms');
-Route::post('/reservations/{client_id}', 'ReservationsController@checkAvailableRooms');
+Route::get('/reservations/{client_id}', 'RoomsController@checkAvailableRooms');
+Route::post('/reservations/{client_id}', 'RoomsController@checkAvailableRooms');
 
 Route::get('/book/room/{client_id}/{room_id}/{date_in}/{date_out}', 'ReservationsController@bookRoom');
 

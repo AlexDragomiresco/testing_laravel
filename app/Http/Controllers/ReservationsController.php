@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 
 class ReservationsController extends Controller
 {
-    public function checkAvailableRooms()
-    {}
-
     public function bookRoom()
-    {}
+    {
+        return view('reservations/bookRoom');
+    }
 }
