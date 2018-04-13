@@ -17,4 +17,18 @@ class ClientController extends Controller
     {
        return $this->titles;
     }
+
+    public function index()
+    {}
+
+    public function newClient()
+    {}
+
+    public function create()
+    {}
+
+    public function show($client_id)
+    {
+
+    }
 }
