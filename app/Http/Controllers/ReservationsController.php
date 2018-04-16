@@ -30,7 +30,5 @@ class ReservationsController extends Controller
         }
 
         return redirect()->route('clients');
-
-//        return view('reservations/bookRoom');
     }
 }
