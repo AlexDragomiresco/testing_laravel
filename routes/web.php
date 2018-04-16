@@ -11,43 +11,49 @@
 |
 */
 
-Route::get('/', 'ContentsController@home');
-Route::get('/clients', 'ClientsController@index');
-Route::get('/clients/new', 'ClientsController@newClient');
-Route::post('/clients/new', 'ClientsController@create');
-Route::get('/clients/{client_id}', 'ClientsController@show');
-Route::post('/clients/{client_id}', 'ClientsController@modify');
+Route::get('/', 'ContentsController@home')->name('home');
+Route::get('/clients', 'ClientController@index')->name('clients');
+Route::get('/clients/new', 'ClientController@newClient')->name('new_client');
+Route::post('/clients/new', 'ClientController@create')->name('create_client');
+Route::get('/clients/{client_id}', 'ClientController@show')->name('show_client');
+Route::post('/clients/{client_id}', 'ClientController@modify')->name('update_client');
 
-Route::get('/reservations/{client_id}', 'RoomsController@checkAvailableRooms');
-Route::post('/reservations/{client_id}', 'RoomsController@checkAvailableRooms');
+Route::get('/reservations/{client_id}', 'RoomsController@checkAvailableRooms')->name('check_room');
+Route::post('/reservations/{client_id}', 'RoomsController@checkAvailableRooms')->name('check_room');
 
-Route::get('/book/room/{client_id}/{room_id}/{date_in}/{date_out}', 'ReservationsController@bookRoom');
+Route::get('/book/room/{client_id}/{room_id}/{date_in}/{date_out}', 'ReservationsController@bookRoom')->name('book_room');
+
 
 
 Route::get('/about', function () {
-    $response_arr = array();
-    $response_arr['author']='Bp';
-    $response_arr['version']='0.1.0';
+    $response_arr = [];
+    $response_arr['author'] = 'BP';
+    $response_arr['version'] = '0.1.1';
     return $response_arr;
-
+    //return '<h3>About</h3>';
 });
 
 Route::get('/home', function () {
-    $data = array();
-    $data['version']= '0.1.0';
+    $data = [];
+    $data['version'] = '0.1.1';
     return view('welcome', $data);
 });
 
-Route::get('/showTitle', 'ClientController@showTitle');
+Route::get('/di', 'ClientController@di');
 
-Route::get('/facade', function () {
-    return DB::select(); //not configured
+Route::get('/facades/db', function () {
+    
+    return DB::select('SELECT * from table');
 });
 
-Route::get('/facade/encrypt', function () {
-    return Crypt::encrypt('password');
+Route::get('/facades/encrypt', function () {
+    
+    return Crypt::encrypt('123456789');
 });
 
-Route::get('/facade/decrypt', function () {
-    return Crypt::decrypt('eyJpdiI6IkszWXNJbm5jUDlPT0RCVVB3Q3pzdXc9PSIsInZhbHVlIjoiS1ZSY0hnNXZaTkMwbzRhSkNLTTRsUT09IiwibWFjIjoiYmY3ZmNkOTEzZTUwNDJlMjY0Y2FiOGQ5N2ZhNTU5ZGNiYzlhMzQ0OTMyZDNjOThjZTU1NGQ3NTZlYTdhZmFlZiJ9');
+//eyJpdiI6IjVuV1lWR3JXRlFmdGFHbXljN0Vodnc9PSIsInZhbHVlIjoibEpLQWJSdmgybDBXRHdjNDJadERwM0lZRWlLZnA5d2hcL1wvMHdCNEpCSklFPSIsIm1hYyI6ImE1NDQxZDhiMTAyNjQyNTZkOTZlY2NkZTdmNmIxYThhNjU1OTI2MGI2OTFmYWUxNmRlODk1ZDNiODgxMTY3YzAifQ==
+
+Route::get('/facades/decrypt', function () {
+    
+    return Crypt::decrypt('eyJpdiI6IjVuV1lWR3JXRlFmdGFHbXljN0Vodnc9PSIsInZhbHVlIjoibEpLQWJSdmgybDBXRHdjNDJadERwM0lZRWlLZnA5d2hcL1wvMHdCNEpCSklFPSIsIm1hYyI6ImE1NDQxZDhiMTAyNjQyNTZkOTZlY2NkZTdmNmIxYThhNjU1OTI2MGI2OTFmYWUxNmRlODk1ZDNiODgxMTY3YzAifQ==');
 });
